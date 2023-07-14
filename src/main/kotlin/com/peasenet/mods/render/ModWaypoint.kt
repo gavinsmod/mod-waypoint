@@ -21,9 +21,7 @@ package com.peasenet.mods.render
 
 import com.peasenet.gui.mod.waypoint.GuiWaypoint
 import com.peasenet.main.GavinsModClient
-import com.peasenet.mods.Mod
 import com.peasenet.mods.ModCategory
-import com.peasenet.mods.Type
 import com.peasenet.mods.render.waypoints.Waypoint
 import com.peasenet.settings.ClickSetting
 import com.peasenet.settings.SettingBuilder
