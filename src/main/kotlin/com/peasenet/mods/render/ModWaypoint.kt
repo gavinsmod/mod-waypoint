@@ -19,8 +19,10 @@
  */
 package com.peasenet.mods.render
 
+import com.peasenet.config.WaypointConfig
 import com.peasenet.gui.mod.waypoint.GuiWaypoint
 import com.peasenet.main.GavinsModClient
+import com.peasenet.main.Settings
 import com.peasenet.mods.ModCategory
 import com.peasenet.mods.render.waypoints.Waypoint
 import com.peasenet.settings.ClickSetting
@@ -33,6 +35,8 @@ import com.peasenet.util.event.data.CameraBob
 import com.peasenet.util.event.data.EntityRender
 import com.peasenet.util.listeners.CameraBobListener
 import com.peasenet.util.listeners.EntityRenderListener
+import net.minecraft.client.MinecraftClient
+
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
@@ -57,7 +61,7 @@ class ModWaypoint : RenderMod(
         super.onEnable()
         em.subscribe(EntityRenderListener::class.java, this)
         em.subscribe(CameraBobListener::class.java, this)
-        for (w in waypointConfig.getLocations()) {
+        for (w in Settings.getConfig<WaypointConfig>("waypoints").getLocations()) {
             if (!w.hasDimensions()) {
                 PlayerUtils.sendMessage(
                     "§6[WARNING]§7 Waypoint \"§b${w.name}§7\" has no dimensions set and will not be rendered.",
@@ -83,12 +87,12 @@ class ModWaypoint : RenderMod(
             .buildSubSetting()
         openMenu = SettingBuilder()
             .setTitle("gavinsmod.settings.render.waypoints.add")
-            .setCallback { client.setScreen(GuiWaypoint()) }
+            .setCallback { MinecraftClient.getInstance().setScreen(GuiWaypoint()) }
             .setSymbol('+')
             .buildClickSetting()
         addSetting(openMenu)
         // get all waypoints and add them to the menu
-        val waypoints = waypointConfig.getLocations().stream()
+        val waypoints = Settings.getConfig<WaypointConfig>("waypoints").getLocations().stream()
             .sorted(Comparator.comparing(Function<Waypoint, String> { obj: Waypoint -> obj.name }))
         for (w in waypoints.toArray()) createWaypoint(w as Waypoint)
     }
@@ -112,8 +116,8 @@ class ModWaypoint : RenderMod(
     }
 
     override fun onEntityRender(er: EntityRender) {
-        val playerDimension = Dimension.fromValue(client.getPlayer().world.dimension.effects.path!!)
-        waypointConfig.getLocations().stream().filter { obj: Waypoint ->
+        val playerDimension = Dimension.fromValue(MinecraftClient.getInstance().player!!.world.dimension.effects.path!!)
+        Settings.getConfig<WaypointConfig>("waypoints").getLocations().stream().filter { obj: Waypoint ->
             obj.canRender(playerDimension)
         }.forEach { w: Waypoint ->
             val aabb = Box(BlockPos(w.x, w.y, w.z))

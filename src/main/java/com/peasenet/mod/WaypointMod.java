@@ -1,5 +1,7 @@
 package com.peasenet.mod;
 
+import com.peasenet.config.WaypointConfig;
+import com.peasenet.main.Settings;
 import com.peasenet.mods.render.ModWaypoint;
 import com.peasenet.main.GavinsMod;
 import net.fabricmc.api.ModInitializer;
@@ -15,6 +17,7 @@ public class WaypointMod implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Hello Fabric world!");
+        Settings.addConfig(new WaypointConfig());
         GavinsMod.addMod(new ModWaypoint());
     }
 }

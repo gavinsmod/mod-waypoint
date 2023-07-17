@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "mod-template",
+  "id": "gem-waypoint",
   "version": "${version}",
-  "name": "mod-template",
+  "name": "gem-waypoint",
   "description": "",
   "authors": [],
   "contact": {
-    "repo": "https://github.com/gavinsmod/mod-template"
+    "repo": "https://github.com/gavinsmod/gem-waypoint"
   },
   "license": "MIT",
-  "icon": "assets/mod-template/icon.png",
+  "icon": "assets/gem-waypoint/icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [
-      "com.peasenet.mod.Mod_template"
+      "com.peasenet.mod.WaypointMod"
     ]
   },
   "mixins": [
-    "mod-template.mixins.json"
+    "gem-waypoint.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "gavinsmod": ">=1.4.5",
+    "gemclient-core": ">=1.0.1",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
   }
