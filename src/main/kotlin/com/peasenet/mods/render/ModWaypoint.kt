@@ -20,6 +20,7 @@
 package com.peasenet.mods.render
 
 import com.peasenet.config.WaypointConfig
+import com.peasenet.config.TracerConfig
 import com.peasenet.gui.mod.waypoint.GuiWaypoint
 import com.peasenet.main.GavinsModClient
 import com.peasenet.main.Settings
@@ -134,7 +135,7 @@ class ModWaypoint : RenderMod(
     }
 
     override fun onCameraViewBob(c: CameraBob) {
-        if (tracerConfig.viewBobCancel) c.cancel()
+        if (Settings.getConfig<TracerConfig>("tracer").viewBobCancel) c.cancel()
     }
 
     companion object {
