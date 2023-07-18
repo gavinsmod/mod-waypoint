@@ -107,7 +107,7 @@ class ModWaypoint : RenderMod(
         val clickSetting = SettingBuilder()
             .setTitle(Text.literal(waypoint.name))
             .setCallback {
-                GavinsModClient.minecraftClient.setScreen(GuiWaypoint(waypoint))
+                MinecraftClient.getInstance().setScreen(GuiWaypoint(waypoint))
             }
             .setHoverable(true)
             .setBackgroundColor(waypoint.color!!)
